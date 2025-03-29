@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divine Academy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* Reset and General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Header Section */
+    header {
+      background:#FF9100;
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      background-image:url("Images/background.png");
+      background-repeat:no-repeat;
+      background-size:cover;
+    }
+    
+    header .logo {
+      width: 150px;
+      margin-bottom: 1rem;
+      border-radius:100%;
+      border:5px solid #ff4500;
+    }
+
+    header h1 {
+      font-size: 3rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #ff3300;
+    }
+
+    /* About Section */
+    section {
+      padding: 3rem 2rem;
+      text-align: center;
+      background:#D0D0D0;
+      border:8px solid #582808;
+      background-color:#A85008;
+      color:#202020;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Faculty Section */
+    .faculty-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background:#A85008;
+      padding: 2rem;
+    }
+
+    #faculty {
+      background-color:#A85008;
+      color:#202020;
+    }
+
+    .faculty-card {
+      background: #202020;
+      border-radius: 15px;
+      margin: 10px;
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease;
+      color:#D0D0D0;
+    }
+
+    .faculty-card.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .faculty-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 5px solid #ff4500;
+      object-fit: cover;
+    }
+
+    /* Contact Section */
+    #contact p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    #contact i {
+      color: #582808;
+    }
+
+    .social-icons a {
+      font-size: 1.8rem;
+      margin: 0 10px;
+      color: #007bff;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ff4500;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #582808;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Logo and Header Animation */
+    header .logo, header h1, header p, header .cta-btn , #about , #faculty {
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInDown 1s ease-out forwards;
+    }
+
+    header h1 { animation-delay: 0.3s; }
+    header p { animation-delay: 0.6s; }
+    header .cta-btn { animation-delay: 0.9s; }
+
+    @keyframes fadeInDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Style for sticky header */
+    .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #FF9100;
+    color: white;
+    text-align: left;
+    padding: 10px 2rem;
+    z-index: 9999;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    }
+    
+    .sticky-header.show {
+    transform: translateY(0);
+    opacity: 1;
+    }
+    
+    .sticky-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    }
+    
+    .sticky-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+    }
+    
+    
+/* Achievement Section Styles 
+#achievements {
+  background-color: #A85008;
+  color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.achievement-container {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.achievement-card {
+  background-color: #202020;
+  border-radius: 15px;
+  padding: 20px;
+  min-width: 250px;
+  text-align: center;
+  color: #D0D0D0;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  opacity: 0; /* Initially hidden */
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Achievements animation - Show cards one by one with delays 
+@keyframes cardTransition {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  25% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.achievement-container .achievement-card:nth-child(1) {
+  animation: cardTransition 12s infinite 0s;
+}
+
+.achievement-container .achievement-card:nth-child(2) {
+  animation: cardTransition 12s infinite 3s;
+}
+
+.achievement-container .achievement-card:nth-child(3) {
+  animation: cardTransition 12s infinite 6s;
+}
+
+.achievement-container .achievement-card:nth-child(4) {
+  animation: cardTransition 12s infinite 9s;
+}*/
+
+/* Achievement Section Styles */
+#achievements {
+  background-color: #A85008;
+  color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.achievement-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  width:250px;
+  margin:0 auto;
+}
+
+.achievement-card {
+  background-color: #202020;
+  border-radius: 15px;
+  padding: 20px;
+  min-width: 250px;
+  text-align: center;
+  color: #D0D0D0;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.achievement-card img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.achievement-card:hover {
+  transform: scale(1.05);
+}
+    
+  </style>
+</head>
+<body>
+<!-- Sticky Header -->
+<div id="sticky-header" class="sticky-header">
+  <img src="images/logo.png" alt="Divine Academy Logo" class="logo" />
+  <h1>Divine Academy</h1>
+</div>
+
+  <!-- Header Section -->
+  <header>
+    <img src="images/logo.png" alt="Divine Academy Logo" class="logo" />
+    <h1>Welcome to Divine Academy</h1>
+    <p>Quality Learning for a Bright Future</p>
+    <a href="#contact" class="cta-btn">Contact Us</a>
+  </header>
+
+
+<!-- Achievement Section -->
+<section id="achievements">
+  <h2>Our Students' Achievements</h2>
+  <div class="achievement-container">
+    <!-- Student Achievement Cards -->
+    <div class="achievement-card">
+      <img src="images/faculty-placeholder.jpg" alt="Student 1">
+      <p>Top Ranker in GUJCET</p>
+    </div>
+    <div class="achievement-card">
+      <img src="images/faculty-placeholder.jpg" alt="Student 2">
+      <p>Top Ranker in JEE</p>
+    </div>
+    <div class="achievement-card">
+      <img src="images/faculty-placeholder.jpg" alt="Student 3">
+      <p>NEET Topper</p>
+    </div>
+    <div class="achievement-card">
+      <img src="images/faculty-placeholder.jpg" alt="Student 4">
+      <p>Excellence in Physics Olympiad</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Divine Academy, we strive for academic excellence under the leadership of <strong>Pragna Patel</strong>. Our expert faculty provides top-notch coaching for Gujarat Board, GUJCET, JEE, and NEET.</p>
+  </section>
+
+  <!-- Faculty Section -->
+  <section id="faculty">
+    <h2>Meet Our Faculty</h2>
+    <div class="faculty-list">
+      <!-- Faculty Cards -->
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Pragna Patel" />
+        <h3>Pragna Patel</h3>
+        <p>Founder & Chemistry HOD</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Prayag Upadhyay" />
+        <h3>Prayag Upadhyay</h3>
+        <p>Physics HOD</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Dilip Kamnani" />
+        <h3>Dilip Kamnani</h3>
+        <p>Maths HOD</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Pritesh Sir" />
+        <h3>Pritesh Sir</h3>
+        <p>Computer Science</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Kasim Gora" />
+        <h3>Kasim Gora</h3>
+        <p>Maths Teacher</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Mansi Modh" />
+        <h3>Mansi Modh</h3>
+        <p>Biology HOD</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Aniket Patel" />
+        <h3>Aniket Patel</h3>
+        <p>Chemistry Teacher</p>
+      </div>
+      <div class="faculty-card">
+        <img src="images/faculty-placeholder.jpg" alt="Prakash Sir" />
+        <h3>Prakash Sir</h3>
+        <p>Biology Teacher</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p><i class="fa fa-envelope"></i> info@divineacademy.com</p>
+    <p><i class="fa fa-phone"></i> +91 12345 67890</p>
+    <p><i class="fa fa-map-marker"></i> Ahmedabad, Gujarat</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Divine Academy. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+  // Get the header and sticky header elements
+  const header = document.querySelector('header');
+  const stickyHeader = document.getElementById('sticky-header');
+  
+  // Function to toggle sticky header visibility
+  function toggleStickyHeader() {
+  if (window.scrollY > 200) {
+  stickyHeader.classList.add('show');
+  } else {
+  stickyHeader.classList.remove('show');
+  }
+  }
+  
+  // Listen for scroll events
+  window.addEventListener('scroll', toggleStickyHeader);
+  
+  // Run the function on load to check initial scroll position
+  window.addEventListener('load', toggleStickyHeader);
+  // Use Intersection Observer to trigger animations when faculty cards are in view
+  const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+  if (entry.isIntersecting) {
+  entry.target.classList.add('active');
+  } else {
+  entry.target.classList.remove('active'); // Remove the active class when the card leaves the viewport
+  }
+  });
+  }, {
+  threshold: 0.5 // Trigger when 50% of the card is visible
+  });
+  
+  const facultyCards = document.querySelectorAll('.faculty-card');
+  facultyCards.forEach(card => {
+  observer.observe(card);
+  });
+  </script>
+ 
+ 
+ <script>
+ // Select the achievement container
+ const achievementContainer = document.querySelector('.achievement-container');
+ 
+ // Function to scroll the container
+ function autoScrollAchievements() {
+ const scrollWidth = achievementContainer.scrollWidth;
+ const scrollPosition = achievementContainer.scrollLeft;
+ 
+ // If we're at the end of the container, reset to the start
+ if (scrollPosition + achievementContainer.offsetWidth >= scrollWidth) {
+ achievementContainer.scrollLeft = 0;
+ } else {
+ achievementContainer.scrollLeft += 250; // Scroll by 200px
+ }
+ }
+ 
+ // Auto-scroll every 2 or 3 seconds
+ setInterval(autoScrollAchievements, 3000);
+ </script>
+</body>
+</html>
